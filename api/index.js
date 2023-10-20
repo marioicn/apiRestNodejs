@@ -1,7 +1,7 @@
 const express = require('express')
 const cors= require('cors')
 const app = express()
-const port = 3000
+const port = process.env.PORT|| 3000
 
 app.use(express.json())
 const routerApi = require('./routes/index')
@@ -25,6 +25,11 @@ routerApi(app)
 app.use(logErrors)
 app.use(boomErrorHandler)
 app.use(errorHandler)
+
+app.get('/api',(req,res)=>{
+    console.log('server en express');
+    res.send('hola')
+})
 
 app.listen(port,()=>{
     console.log(`Puerto ${port}`);
